@@ -5,8 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MonthList from './components/MonthList';
 import UserList from './components/UserList';
-import Nav from './components/Nav'
-
+import Nav from './components/Nav';
 
 function App() {
   return (

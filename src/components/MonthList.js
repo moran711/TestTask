@@ -1,45 +1,46 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav';
+import {connect} from 'react-redux';
+import ListGroup from 'react-bootstrap/ListGroup';
+import {changeMonthHover, changeContent} from '../redux/actions';
+import {colorOfMonth} from '../utils/utils';
 
-export default function UserList() {
+
+const  MonthList = ({monthList, changeMonthHover, changeContent, userList}) => { 
     return (
-        <Nav variant="pills" className="flex-column">
-            <Nav.Item>
-                <Nav.Link>January</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>February</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>March</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>April</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>May</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>June</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>July</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>August</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>September</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>October</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>November</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link>December</Nav.Link>
-            </Nav.Item>
-      </Nav>
-    )
+        <ListGroup variant="pills" className="flex-column">
+            {monthList.map((el) => {
+                return (
+                    <ListGroup.Item 
+                            key={el.key}
+                            onMouseEnter={() => {
+                                changeMonthHover(el.month);
+                                changeContent(el.month, userList);
+                            }} 
+                            onMouseLeave={() => { 
+                                changeMonthHover('none');
+                                changeContent('none', []);
+                            }}
+                            variant={colorOfMonth(el.month, userList)}
+                            action
+                        >
+                            {el.month}
+                    </ListGroup.Item>
+                );
+            })}
+      </ListGroup>
+    );
 }
+
+const mapStateToProps = state => {
+    return {
+        userList: state.users.users, 
+        monthList: state.month.monthList
+    };
+}
+
+const mapDispatchToProps = {
+    changeMonthHover,
+    changeContent
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonthList);
