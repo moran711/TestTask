@@ -12,5 +12,5 @@ export default function Nav() {
                 </Navbar.Text>
             </Container>
         </Navbar>
-    )
+    );
 }

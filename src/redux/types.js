@@ -1,0 +1,5 @@
+export const CHANGE_MONTH_HOVER = 'CHANGE_MONTH_HOVER';
+export const CHANGE_CONTENT = 'CHANGE_CONTENT';
+export const FETCH_USERS = 'FETCH_USERS';
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDELOADER';
